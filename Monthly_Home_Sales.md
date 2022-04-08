@@ -135,5 +135,18 @@ mean (figure 11), as opposed to the plot on the original data (figure 10).
 </p>
 
 
+* if there is no systematic change in mean (no trend) and if there is no periodic variation
+
+in this case differencing can help stabilise the mean of a time series by removing changes in the level of a time series, and
+therefore eliminating (or reducing) trend and seasonality.
+3 types of differences have been try on the transformed series Y<sub>t</sub>:
+
+* First-difference
+* Seasonal-difference
+* Combination between Non-seasonal and seasonal differences
 
 
+The differentiated series were compared with the criterion of minimum variance and the Augumented Dickey-Fuller test
+(ADF).Just with First-difference we have a stationary series with an ADF p-value smaller than 0.01 but with a variance higher than the combination between Non-seasonal and seasonal differences that also have p-value=0.01. So in this case the combination was chosen.
+
+Now we have a stationary series.
