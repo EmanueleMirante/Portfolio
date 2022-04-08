@@ -41,13 +41,13 @@ There are two classic methods of decomposition:
 * Additive Decomposition
 
 
-X<sub>t</sub>= S<sub>t</sub> + T<sub>1</sub> + R <sub>t</sub>
+X<sub>t</sub>= S<sub>t</sub> + T<sub>t</sub> + R <sub>t</sub>
 
 This model is appropriate if magnitude of seasonal fluctuations does not vary with level of the series.
 
 * Multiplicative Decomposition
 
-X<sub>t</sub>= S<sub>t</sub> * T<sub>1</sub> * R <sub>t</sub>
+X<sub>t</sub>= S<sub>t</sub> * T<sub>t</sub> * R <sub>t</sub>
 
 This model is appropriate if magnitude of seasonal fluctuations are proportional to level of the series.
 
@@ -62,9 +62,57 @@ The trend component in figure confirm what was said above, there is a strong col
 
 * Calculate the detrended series X<sub>t</sub>/T<sub>t</sub> and estimate the seasonal component for each season taking the average of the detrended values for the season.
 
+In the figure 4 there is the fixed seasonal component plot for every year, in particular on graph in figure 5 we can see in
+detail that the months with positive effect on the sales(above the red line) are those between 5 and 10, meanwhile the
+winter months have negative effects on the sales(1 to 4 and 11 to 12
+
+* In the end the remainder component is calculates divide the series for T and S.
+
+
 <p float="left">
-  <img src="Images/Monthly_Home_Sales_IMG/Trend.png" width="200" />
-  <img src="Images/Monthly_Home_Sales_IMG/SSs.png" width="200" /> 
-  <img src="Images/Monthly_Home_Sales_IMG/Seascomp.png" width="200" /> 
-  <img src="Images/Monthly_Home_Sales_IMG/remaind.png" width="200" /> 
+  <img src="Images/Monthly_Home_Sales_IMG/Trend.png" width="270" />
+  <img src="Images/Monthly_Home_Sales_IMG/SSs.png" width="220" /> 
+  <img src="Images/Monthly_Home_Sales_IMG/Seascomp.png" width="220" /> 
+  <img src="Images/Monthly_Home_Sales_IMG/remaind.png" width="270" /> 
 </p>
+
+These classic approaches are easy to apply but have some disadvantages, for example the estimate of the trend-cycle is unavaible
+for the first few and last few observation, in this case with m=12, there is no trend-cycle estimate for the first six and the last
+six observations.Consequently there is also no estimate of the remainder component for the same time periods.Moreover this
+classical decomposition methods assume that the seasonal component repeats from year to year.
+Therefore now we use a more robust method for decomposing time series. The Seasonal and Trend decomposition using
+Lowess(STL) is a robust method that has several advantages:will handle any type of seasonality,the seasonal component is
+allowed to change over time and it does not present the problem of missing values for the first and last m/2 observations of the
+trend.
+
+For the STL decomposition it is used the stl function in R-package, the two main parameters to be chosen when using STL
+are the trend-cycle window and the seasonal window season.Both trend and seasonal windows should be odd numbers; trend
+window is the number of consecutive observations to be used when estimating the trend-cycle; season window is the number of
+consecutive years to be used in estimating each value in the seasonal component.In this case the season window has been set to
+7 that allows more rapid changes meanwhile the value of the trend window has been left by default.
+
+
+<p float="left">
+  <img src="Images/Monthly_Home_Sales_IMG/STL.png" width="500" />
+  <img src="Images/Monthly_Home_Sales_IMG/plotzres.png" width="500" /> 
+</p>
+
+With the STL decomposition (figure 7), the trend is similar to that calculated with the multiplicative decomposition but is
+more ”smooth”,moreover the seasonal component varies over the time and it is stronger when sales increase, weaker when
+they decrease.The residues obtained from the STL are close to 0 except for the last observations where the remainders are
+greater(figure 8).
+
+For what has been said in the previous analysis the series is not stationary.
+The data must be transformed to have a stationary process.A time series can be considered a realization of a stationary stochastic
+process if:
+
+* if there is no systematic change in variance,
+
+To achieve omoschedasticity a Box-Cox transformation can be used.The problem is to find λ∗ such that the series is as omoschedastic as possible.Box and Cox (1964) proposed choosing the appropriate value of ￿ based on maximizing the likelihood function, so using the MASS package was found λ∗ = 0.1818
+(figure 9).We can see that with this λ∗ the Box-Cox transformation makes the standard deviation invariant respect to the mean (figure 11), as opposed to the plot on the original data (figure 10)
+
+With the STL decomposition (figure 7), the trend is similar to that calculated with the multiplicative decomposition but is
+more ”smooth”,moreover the seasonal component varies over the time and it is stronger when sales increase, weaker when
+they decrease.The residues obtained from the STL are close to 0 except for the last observations where the remainders are
+greater(figure 8)
+
