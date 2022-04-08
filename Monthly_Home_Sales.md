@@ -19,9 +19,9 @@ the graph of the series, many of the patterns in the data can be seen visually.
 In the time series plot we can observe an increasing trend in 2000–2006, a changing direction with a decreasing trend in home
 sales starting from 2006 probably due to subprime mortgage crisis, an increasing trend again from 2012. We can also observe
 seasonality. It is possible to investigate this last aspect with the Seasonal and Seasonal Subseries plot. In a seasonal plot the
-data are plotted against the individual ”seasons” in which the data were observed making a curve for each year 2a.In a Seasonal
+data are plotted against the individual ”seasons” in which the data were observed making a curve for each year .In a Seasonal
 subseries plot the data for each season are collected together in separate mini time plots and the horizontal lines, indicate the
-means for each season 2b.
+means for each season.
 
 <p float="left">
   <img src="Images/Monthly_Home_Sales_IMG/Rplot.png" width="500" />
@@ -62,7 +62,7 @@ The trend component in figure confirm what was said above, there is a strong col
 
 * Calculate the detrended series X<sub>t</sub>/T<sub>t</sub> and estimate the seasonal component for each season taking the average of the detrended values for the season.
 
-In the figure 4 there is the fixed seasonal component plot for every year, in particular on graph in figure 5 we can see in
+In the figure 2 there is the fixed seasonal component plot for every year, in particular on graph in figure 3 we can see in
 detail that the months with positive effect on the sales(above the red line) are those between 5 and 10, meanwhile the
 winter months have negative effects on the sales(1 to 4 and 11 to 12
 
@@ -98,10 +98,10 @@ consecutive years to be used in estimating each value in the seasonal component.
 </p>
 
 
-With the STL decomposition (figure 7), the trend is similar to that calculated with the multiplicative decomposition but is
+With the STL decomposition (figure 1 above) the trend is similar to that calculated with the multiplicative decomposition but is
 more ”smooth”,moreover the seasonal component varies over the time and it is stronger when sales increase, weaker when
 they decrease.The residues obtained from the STL are close to 0 except for the last observations where the remainders are
-greater(figure 8).
+greater.
 
 For what has been said in the previous analysis the series is not stationary.
 The data must be transformed to have a stationary process.A time series can be considered a realization of a stationary stochastic
@@ -112,8 +112,8 @@ process if:
 To achieve omoschedasticity a Box-Cox transformation can be used.
 The problem is to find λ∗ such that the series is as omoschedastic as possible.Box and Cox (1964) proposed choosing the
 appropriate value of ￿ based on maximizing the likelihood function, so using the MASS package was found λ∗ = 0.1818
-(figure 9).We can see that with this λ∗ the Box-Cox transformation makes the standard deviation invariant respect to the
-mean (figure 11), as opposed to the plot on the original data (figure 10).
+(figure 1).We can see that with this λ∗ the Box-Cox transformation makes the standard deviation invariant respect to the
+mean (figure 2), as opposed to the plot on the original data (figure 3).
 
 <p float="left">
   <img src="Images/Monthly_Home_Sales_IMG/logFunction.png" width="300" />
