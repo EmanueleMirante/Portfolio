@@ -66,7 +66,7 @@ In the figure 4 there is the fixed seasonal component plot for every year, in pa
 detail that the months with positive effect on the sales(above the red line) are those between 5 and 10, meanwhile the
 winter months have negative effects on the sales(1 to 4 and 11 to 12
 
-* In the end the remainder component is calculates divide the series for T and S.
+* In the end the remainder component is calculates dividing the series by T*S.
 
 
 <p float="left">
@@ -114,5 +114,26 @@ To achieve omoschedasticity a Box-Cox transformation can be used.The problem is 
 With the STL decomposition (figure 7), the trend is similar to that calculated with the multiplicative decomposition but is
 more ”smooth”,moreover the seasonal component varies over the time and it is stronger when sales increase, weaker when
 they decrease.The residues obtained from the STL are close to 0 except for the last observations where the remainders are
-greater(figure 8)
+greater(figure 8).
+
+For what has been said in the previous analysis the series is not stationary.
+The data must be transformed to have a stationary process.A time series can be considered a realization of a stationary stochastic
+process if:
+
+* there is no systematic change in variance,
+
+To achieve omoschedasticity a Box-Cox transformation can be used.
+The problem is to find λ∗ such that the series is as omoschedastic as possible.Box and Cox (1964) proposed choosing the
+appropriate value of ￿ based on maximizing the likelihood function, so using the MASS package was found λ∗ = 0.1818
+(figure 9).We can see that with this λ∗ the Box-Cox transformation makes the standard deviation invariant respect to the
+mean (figure 11), as opposed to the plot on the original data (figure 10).
+
+<p float="left">
+  <img src="Images/Monthly_Home_Sales_IMG/logFunction.png" width="300" />
+  <img src="Images/Monthly_Home_Sales_IMG/OriginData.png" width="300" /> 
+  <img src="Images/Monthly_Home_Sales_IMG/TransfData.png" width="300" /> 
+</p>
+
+
+
 
