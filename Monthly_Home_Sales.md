@@ -61,3 +61,10 @@ As said before, we must split the original time series into component series, it
 The trend component in figure confirm what was said above, there is a strong collapse from 2006 and a fast rise from 2012 with an interval (2019-2020) where there was a decrease in sales maybe due to "COVID-19" pandemic.
 
 * Calculate the detrended series X<sub>t</sub>/T<sub>t</sub> and estimate the seasonal component for each season taking the average of the detrended values for the season.
+
+<p float="left">
+  <img src="Images/Monthly_Home_Sales_IMG/Trend.png" width="200" />
+  <img src="Images/Monthly_Home_Sales_IMG/SSs.png" width="200" /> 
+  <img src="Images/Monthly_Home_Sales_IMG/Seascomp.png" width="200" /> 
+  <img src="Images/Monthly_Home_Sales_IMG/remaind.png" width="200" /> 
+</p>
