@@ -1,0 +1,24 @@
+
+.image-container {
+  float: right;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 300px;
+}
+
+.cat-container {
+  flex: 1 1 50%;
+  padding: 0px 1rem;
+  box-sizing: border-box;
+}
+
+img.cat {
+  width: 100%;
+  height: auto;
+}
+
+.caption {
+  font-size: 14px;
+  text-align: center;
+}
+
