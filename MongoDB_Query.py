@@ -5,7 +5,23 @@ import matplotlib.pyplot as plt
 import pprint
 plt.style.use('ggplot')
 
+'''
 
+
+THE GOAL IS TO RESOLVE 9 QUERIES:
+
+Query 1] Number of contents for each author
+Query 2] Number of comments for each author
+Query 3]Word Cloud  
+Query 4]First 5 terms more used for each author
+Query 5]First 5 terms more used for each time slot of the day[morning, afternoon,evening, night]
+Query 6]Mean number of word in each title
+Query 7]Authors with more than 350 comments in alphabetical order 
+Query 8]Given as input a term, show the graph related to its usage over time
+Query 9] Given as input a time slot, show the tagCloud of the terms used
+
+
+'''
 
 #Connect to localhost
 client=MongoClient()
@@ -78,7 +94,6 @@ for i in collezione.aggregate([ {'$project': {'Author':1,'occorrenze': { '$split
             continue
 pprint.pprint(diz)
 
-#[Query5]Quali sono i 5 termini più utilizzati in ciascuna delle fasce orarie giornaliere(i.e., mattina, pomeriggio, sera, notte)?
 #[Query 5]First 5 terms more used for each time slot of the day[morning, afternoon,evening, night]
 
 
