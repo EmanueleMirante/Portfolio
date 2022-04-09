@@ -5,6 +5,8 @@ used has been obtained from Federal Reserve Economic Data(FRED).
 
 ## Preliminary Analysis
 
+The assumption that our time series is a realization of a stationary process is clearly fundamental in time series analysis, so we must first determine whether the series can be considered a realization of a stationary process.In this stage a very useful tool is the graph of the series, many of the patterns in the data can be seen visually.
+
 <p float="left">
   <figcaption>Fig 1: Time Plot</figcaption>
   <img src="Images/Annual_Median_Home_Sales_Price_IMG/yearP.png" width="500"  title= 'cico'/>
