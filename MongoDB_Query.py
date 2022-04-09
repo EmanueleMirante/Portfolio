@@ -6,6 +6,8 @@ import pprint
 plt.style.use('ggplot')
 
 
+
+#Connect to localhost
 client=MongoClient()
 db=client.HakerNews
 collezione=db.HakerNews
