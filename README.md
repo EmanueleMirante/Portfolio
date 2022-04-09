@@ -1,3 +1,3 @@
 # Portfolio
 
-Portfolio of my data projects
+Collection of my data projects
