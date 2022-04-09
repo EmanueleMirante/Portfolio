@@ -7,9 +7,9 @@ used has been obtained from Federal Reserve Economic Data(FRED).
 
 <p float="left">
   <figcaption>Fig 1: Time Plot</figcaption>
-  <img src="Images/Annual_Median_Home_Sales_Price_IMG/yearP.png" width="310"  title= 'cico'/>
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/yearP.png" width="500"  title= 'cico'/>
   <figcaption>Fig 2: Median Home Price in the United States (Nominal - Inflaction-adjusted)</figcaption>
-  <img src="Images/Annual_Median_Home_Sales_Price_IMG/infnot.png" width="310" /> 
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/infnot.png" width="500" /> 
 
 </p>
 
@@ -29,12 +29,12 @@ positive trend seems, however, to remain. The positive trend is confirmed by dec
 
 <p float="left">
   <figcaption>Fig 3: Acf original data</figcaption>
-  <img src="Images/Annual_Median_Home_Sales_Price_IMG/acforig.png" width="310"  />
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/acforig.png" width="500"  />
 </p>
 
 <p float="left">
   <figcaption>Fig 4: Acf adjusted data </figcaption>
-  <img src="Images/Annual_Median_Home_Sales_Price_IMG/acfadj.png" width="310" /> 
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/acfadj.png" width="500" /> 
 </p>
 
 The series is annual and therefore has no seasonality so we can compute only the ”trend” component.In particular this component
@@ -63,9 +63,9 @@ As it appears from the ACF plot(figure 10), the series ∆Yt is stationary , asp
 
 <p float="left">
   <figcaption>Fig 9: ACF X<sub>t</sub> </figcaption>
-  <img src="Images/Annual_Median_Home_Sales_Price_IMG/acfadj.png" width="310"  title= 'cico'/>
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/acfadj.png" width="500"  title= 'cico'/>
   <figcaption>Fig 10: ACF ∆Y<sub>t</sub></figcaption>
-  <img src="Images/Annual_Median_Home_Sales_Price_IMG/Rplot07.png" width="310" /> 
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/Rplot07.png" width="500" /> 
 
 </p>
 
@@ -80,10 +80,90 @@ Once the model has been identified we have to estimate the paremeters. For the c
 subsequently were used the information criteria(AIC,SBIC) to discriminate among the competing model.
 
 25 models have been estimated,the model that minimizes AIC is ARIMA(3,1,1),the one chosen by the minimizzation of SBIC is an
-ARIMA(2,1,1).In figure 36 the are the acf, pacf and qqplot of the model chosen with SBIC.It appears that almost all correlations
+ARIMA(2,1,1).In figures below the are the acf, pacf and qqplot of the model chosen with SBIC.It appears that almost all correlations
 in the residuals result from randomness of the sampling process, and from the q-q plot they appear normally distributed.What
 has been said previously is checked by Ljung-Box test that confirms the null hypothesis of indipendence and from the Jarque-Bera
-test that confirms the null hypothesis of Normality
+test that confirms the null hypothesis of Normality.
+
+<p float="left">
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/acffitB.png" width="310"  title= 'cico'/>
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/pacffitB.png" width="310" /> 
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/qqplotFitB.png" width="310" /> 
+
+</p>
 
 
+In the table there are the coeﬀicients for the model ARIMA(2,1,1),calculated the test statistic t, we can say that all the coeﬀicients
+of the model are significant.
+
+  |             | AR1         | AR2       |MA1
+  | ----------- | ----------- |-----------|-----------|
+  | Coef        | 0.98        | -0.33     |-0.72
+  | Sd          | 0.19601     | 0.12650   |0.16881
+  | t.value     | 5.004       |-2.645     |-4.283
+
+Table 1: Coeﬀicients of ARIMA(2,1,1) - SBIC
+
+
+
+
+In figure below instead the are the acf, pacf and q-qplot of the model chosen with AIC.Also in this case the residuals result normal and
+independent both by seeing the graphs and by performing a formal tests
+
+
+
+<p float="left">
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/acffita.png" width="310"  title= 'cico'/>
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/pacffita.png" width="310" /> 
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/qqplotfita.png" width="310" /> 
+
+</p>
+
+
+
+  |             | AR1         | AR2       |MA1
+  | ----------- | ----------- |-----------|-----------|
+  | Coef        | 0.98        | -0.33     |-0.72
+  | Sd          | 0.19601     | 0.12650   |0.16881
+  | t.value     | 5.004       |-2.645     |-4.283
+
+Table 2: Coeﬀicients of ARIMA(3,1,1) - AIC
+
+
+In table 2 there are the coeﬀicients for the model ARIMA(3,1,1),calculated the test statistic t, we can say that all the coeﬀicients
+of the model are significant at the 5% level except for the AR2 and AR3 coeﬀicients.
+
+### Forecasting
+
+Now let’s compare the models based on forecast performance.The dataset has been divided into train(from 1963 to 2010 ∼ 80%
+of observation) and test set(from 2011 to 2020 ∼ 20% of observation).
+We look for the model that minimizes all the metrics, in this case it is ARIMA(3, 1, 1),the model chosen by AIC. In the figure
+11 we can see the predicted values plot on the Box-Cox scale(with the confident interval) of the adjusted-inflaction data, and
+in the figure 12[^1] the predicted values plot on the nominal price scale after applying the Box-Cox back transformation and the
+inverse formula to return to nominal values.
+
+
+
+
+  |   MODEL     | RMSE        | MAE       |MPE        |MAPE  
+  | ----------- | ----------- |-----------|-----------|-----------
+  | Arima(2,1,1)| 7.97        | 7.28     |3.54      |3.78
+  | Arima(3,1,1)| 7.28     | 6.52   |3.06    |3.39
+ 
+ Table 3: Metrics for both models
+
+
+
+
+
+
+<p float="left">
+  <figcaption>Fig 11: Predicted Values on Box-Cox Scale </figcaption>
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/plotplot.png" width="500"  title= 'cico'/>
+  <figcaption>Fig 12: Figure 42: Predicted Values on Nominal Price Scale </figcaption>
+  <img src="Images/Annual_Median_Home_Sales_Price_IMG/evvai.png" width="500" /> 
+
+</p>
+
+[^1]: The green line represent the train set, the red line the predictions and the blue line the test set
 
