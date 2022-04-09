@@ -17,20 +17,20 @@ def printQuery(a):
 
 #[Query 1] Number of contents for each author
 
-'''
+
 nContenuti=collezione.aggregate([{"$group": {'_id': "$Author", 'count': {'$sum': 1}}},{'$sort':{"count":-1}}])
 printQuery(nContenuti)
 
-'''
+
 #[Query 2] Number of comments for each author
 
-'''
+
 sCommenti=collezione.aggregate([{"$group":{'_id':'$Author','sum':{'$sum':'$num_comments'}}},{'$sort':{'sum':-1}}])
 printQuery(sCommenti)
 
-'''
+
 #[Query 3]Word Cloud  
-'''
+
 stop_words = get_stop_words('en')
 diz={}
 
@@ -46,11 +46,11 @@ wc.generate_from_frequencies(diz)
 plt.imshow(wc, interpolation="bilinear")
 plt.axis("off")
 plt.show()
-'''
+
 
 #[Query 4]First 5 terms more used for each author
 
-'''
+
 diz={}
 stop_words = get_stop_words('en')
 for i in collezione.aggregate([ {'$project': {'Author':1,'occorrenze': { '$split': ["$Title", " "] }}},
@@ -75,10 +75,11 @@ for i in collezione.aggregate([ {'$project': {'Author':1,'occorrenze': { '$split
         else:
             continue
 pprint.pprint(diz)
-'''
+
 #[Query5]Quali sono i 5 termini più utilizzati in ciascuna delle fasce orarie giornaliere(i.e., mattina, pomeriggio, sera, notte)?
 #[Query 5]First 5 terms more used for each time slot of the day[morning, afternoon,evening, night]
-'''
+
+
 diz={}
 stop_words = get_stop_words('en')
 for i in collezione.aggregate([{'$project': {'FasciaOraria':1,'occorrenze': { '$split': ["$Title", " "] }}},
@@ -103,27 +104,28 @@ for i in collezione.aggregate([{'$project': {'FasciaOraria':1,'occorrenze': { '$
         else:
             continue
 pprint.pprint(diz)
-'''
+
 
 
 #[Query 6]Mean number of word in each title
-'''
+
 NTermini=collezione.aggregate([{'$project':{'Title':1,'termini':{'$split': ['$Title',' ']}}},{'$unwind': '$termini'},{'$group':{'_id':'$Title','count':{'$sum':1}}},
                                {'$group':{'_id':0,'NumeroMedioDiParole':{'$avg':'$count'}}}])
 printQuery(NTermini)
 
-'''
+
 
 #[Query 7]Authors with more than 350 comments in alphabetical order 
-'''
+
+
 a350=collezione.aggregate([{'$project':{'Author':1,'num_comments':1}},{'$group':{'_id':'$Author','Ncommenti':{'$sum':'$num_comments'}}},{'$match':{
     'Ncommenti':{'$gt':350}}},{'$sort':{'_id':1}}])
 printQuery(a350)
 
-'''
+
 #[Query 8]Given as input a term, show the graph related to its usage over time;
 
-'''
+
 stop_words = get_stop_words('en')
 
 inp=str(input('Scrivi un termine da cercare oppure premi 0 per uscire: '))
@@ -159,9 +161,10 @@ while inp != '0':
             inp = str(input('Scrivi un termine da cercare oppure premi 0 per uscire: '))
 print('bye bye')
 
-'''
+
 #[Query 9] Given as input a time slot, show the tagCloud of the terms used
-'''
+
+
 stop_words = get_stop_words('en')
 fascia=input('Inserisci una fascia giornaliera(mattina,pomeriggio,sera,notte) Oppure premi 0 per uscire: ')
 while fascia != '0':
@@ -185,6 +188,6 @@ while fascia != '0':
         plt.close()
         fascia = input('Inserisci una fascia giornaliera (mattina,pomeriggio,sera,notte) Oppure premi 0 per uscire: ')
 print('bye bye')
-'''
+
 
 
