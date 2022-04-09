@@ -2,4 +2,4 @@
 
 Collection of my data projects
 
-[More Info](https://emanuelemirante.github.io/Projects.html)
+[More Info](https://emanuelemirante.github.io/index.html)
